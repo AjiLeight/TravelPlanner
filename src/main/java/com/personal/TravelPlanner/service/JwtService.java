@@ -1,5 +1,6 @@
 package com.personal.TravelPlanner.service;
 
+import com.personal.TravelPlanner.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -24,18 +25,31 @@ public class JwtService {
         return extractClaim(token, Claims::getSubject);
     }
 
-    public String generateToken(UserDetails userDetails){
-        return generateToken(new HashMap<>(),userDetails);
+    public String generateToken(UserDetails userDetails,Map<String, Object> extraClaims){
+
+        long jwtExpiration= 30000;
+        return buildToken(new HashMap<>(),userDetails,jwtExpiration);
+
+    }
+    public String generateToken(UserDetails userDetails) {
+        return generateToken(userDetails,new HashMap<>());
     }
 
-    public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
+    public String generateRefreshToken(UserDetails userDetails) {
+
+        long refreshExpiration =604800000;
+        return buildToken(new HashMap<>(),userDetails,refreshExpiration);
+
+    }
+
+    public String buildToken(Map<String, Object> extraClaims, UserDetails userDetails,long expiration) {
 
         return Jwts
                 .builder()
                 .setClaims (extraClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration (new Date(System.currentTimeMillis() + 1000*60*60*24))
+                .setExpiration (new Date(System.currentTimeMillis() + expiration))
                 .signWith(getSignkey(), SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -70,4 +84,6 @@ public class JwtService {
         byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(keyBytes);
     }
+
+
 }
