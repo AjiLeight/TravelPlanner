@@ -1,6 +1,5 @@
 package com.personal.TravelPlanner.service;
 
-import com.personal.TravelPlanner.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -21,14 +20,20 @@ public class JwtService {
     @Value("${jwt.secret}")
     private String SECRET_KEY;
 
+    @Value("${jwt.jwtTokenExpiry}")
+    private long JWT_TOKEN_EXPIRY;
+
+    @Value("${jwt.jwtRefreshTokenExpiry}")
+    private long JWT_REFRESH_TOKEN_EXPIRY;
+
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
     public String generateToken(UserDetails userDetails,Map<String, Object> extraClaims){
 
-        long jwtExpiration= 30000;
-        return buildToken(new HashMap<>(),userDetails,jwtExpiration);
+
+        return buildToken(new HashMap<>(),userDetails,JWT_TOKEN_EXPIRY);
 
     }
     public String generateToken(UserDetails userDetails) {
@@ -37,8 +42,8 @@ public class JwtService {
 
     public String generateRefreshToken(UserDetails userDetails) {
 
-        long refreshExpiration =604800000;
-        return buildToken(new HashMap<>(),userDetails,refreshExpiration);
+
+        return buildToken(new HashMap<>(),userDetails,JWT_REFRESH_TOKEN_EXPIRY);
 
     }
 
