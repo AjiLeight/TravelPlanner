@@ -6,18 +6,17 @@ import com.personal.TravelPlanner.dto.AuthenticationResponseDTO;
 import com.personal.TravelPlanner.dto.RegisterRequestDTO;
 import com.personal.TravelPlanner.entity.Token;
 import com.personal.TravelPlanner.entity.User;
+import com.personal.TravelPlanner.exception.TokenExpiredException;
 import com.personal.TravelPlanner.repository.TokenRepository;
 import com.personal.TravelPlanner.repository.UserRepository;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -42,6 +41,7 @@ public class AuthenticationService  {
                 .role(request.getRole())
                 .build();
         var savedUser = userRepository.save(user);
+
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
         saveUserToken(savedUser, jwtToken);
@@ -64,10 +64,10 @@ public class AuthenticationService  {
                 .build();
     }
 
-    public void refreshToken(
+    public void refreshToken (
             HttpServletRequest request,
             HttpServletResponse response
-    ) throws IOException {
+    ) throws Exception {
         final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         final String refreshToken;
         final String userEmail;

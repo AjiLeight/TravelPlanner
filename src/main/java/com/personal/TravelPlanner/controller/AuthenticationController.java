@@ -12,7 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
+
+
 
 @RestController
 @RequiredArgsConstructor
@@ -33,8 +34,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponseDTO> authenticate(
-            @RequestBody AuthenticationRequestDTO request){
+    public ResponseEntity<AuthenticationResponseDTO> authenticate(@RequestBody AuthenticationRequestDTO request){
 
         return  ResponseEntity.ok(service.authenticate(request));
         //
@@ -44,7 +44,7 @@ public class AuthenticationController {
     public void refreshToken(
             HttpServletRequest request,
             HttpServletResponse response
-    ) throws IOException {
+    ) throws Exception {
         service.refreshToken(request, response);
     }
 
