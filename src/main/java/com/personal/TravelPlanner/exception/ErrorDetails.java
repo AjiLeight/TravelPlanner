@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class ErrorDetails {
 	
-	private LocalDateTime timestamp;
+	private String timestamp;
 	private String message;
 	private String details;
 }
