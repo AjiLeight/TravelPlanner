@@ -1,19 +1,29 @@
 pipeline {
     agent any
-    stages {
-        stage("build") {
-            steps {
-              echo 'building application.....'
-            }
+    options{
+            buildDiscarder(logRotator(numToKeepStr: '5', daysToKeepStr: '5'))
+            timestamps()
         }
-        stage("test") {
+        environment{
+
+            registry = "leight89/travelplanner"
+            registryCredential = 'dockerhub'
+        }
+    stages {
+        stage("build docker image") {
             steps {
-                echo 'testing application.....'
+                script {
+                    dockerImage = docker.build registry
+                }
             }
         }
         stage("deploy") {
             steps {
-                echo 'deploying application.....'
+                script {
+                    docker.withRegistry( '', registryCredential ) {
+                        dockerImage.push()
+                    }
+                }
             }
         }
     }
