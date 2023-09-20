@@ -2,6 +2,7 @@ package com.personal.TravelPlanner.exception;
 
 import java.time.LocalDateTime;
 
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -33,6 +34,7 @@ public class CustomizedResponseEntityHandler extends ResponseEntityExceptionHand
         return new ResponseEntity<>(errorDetails, HttpStatus.CONFLICT);
 
     }
+
 
     @ExceptionHandler(TokenExpiredException.class)
     public final ResponseEntity<ErrorDetails> handleTokenExpiredException(Exception ex, WebRequest request) throws Exception {
