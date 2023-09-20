@@ -3,6 +3,7 @@ package com.personal.TravelPlanner.exception;
 import java.time.LocalDateTime;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -19,8 +20,7 @@ public class CustomizedResponseEntityHandler extends ResponseEntityExceptionHand
 
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<ErrorDetails> handleAllExceptions(Exception ex, WebRequest request) throws Exception {
-        ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(),
-                ex.getMessage(), request.getDescription(false));
+        ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now().toString(),ex.getMessage(), request.getDescription(false));
 
         return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
 
@@ -28,7 +28,7 @@ public class CustomizedResponseEntityHandler extends ResponseEntityExceptionHand
 
     @ExceptionHandler(EmailAlreadyExistsException.class)
     public final ResponseEntity<ErrorDetails> handleEmailAlreadyExistException(Exception ex, WebRequest request) throws Exception {
-        ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(),
+        ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now().toString(),
                 ex.getMessage(), request.getDescription(false));
 
         return new ResponseEntity<>(errorDetails, HttpStatus.CONFLICT);
@@ -38,7 +38,7 @@ public class CustomizedResponseEntityHandler extends ResponseEntityExceptionHand
 
     @ExceptionHandler(TokenExpiredException.class)
     public final ResponseEntity<ErrorDetails> handleTokenExpiredException(Exception ex, WebRequest request) throws Exception {
-        ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(),
+        ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now().toString(),
                 ex.getMessage(), request.getDescription(false));
 
         return new ResponseEntity<>(errorDetails, HttpStatus.UNAUTHORIZED);
@@ -48,7 +48,7 @@ public class CustomizedResponseEntityHandler extends ResponseEntityExceptionHand
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 
-        ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(),
+        ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now().toString(),
                 "Total errors: " + ex.getErrorCount() +" and first one is: "+ex.getFieldError().getDefaultMessage(), request.getDescription(false));
 
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);

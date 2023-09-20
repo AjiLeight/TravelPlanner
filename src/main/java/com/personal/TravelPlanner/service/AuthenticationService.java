@@ -46,7 +46,7 @@ public class AuthenticationService  {
         var refreshToken = jwtService.generateRefreshToken(user);
         saveUserToken(savedUser, jwtToken);
         return AuthenticationResponseDTO.builder()
-                .token(jwtToken)
+                .accessToken(jwtToken).refreshToken(refreshToken)
                 .build();
     }
 
@@ -59,8 +59,10 @@ public class AuthenticationService  {
         );
         var user = userRepository.findByEmail(request.getEmail()).orElseThrow();
         var jwtToken= jwtService.generateToken(user);
+        var refreshToken = jwtService.generateRefreshToken(user);
+        saveUserToken(user, jwtToken);
         return AuthenticationResponseDTO.builder()
-                .token(jwtToken)
+                .accessToken(jwtToken).refreshToken(refreshToken)
                 .build();
     }
 
@@ -84,7 +86,7 @@ public class AuthenticationService  {
                 revokeAllUserTokens(user);
                 saveUserToken(user, accessToken);
                 var authResponse = AuthenticationResponseDTO.builder()
-                        .token(accessToken)
+                        .accessToken(accessToken)
                         .build();
                 new ObjectMapper().writeValue(response.getOutputStream(), authResponse);
             }

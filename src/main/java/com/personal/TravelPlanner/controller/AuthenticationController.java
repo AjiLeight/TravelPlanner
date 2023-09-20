@@ -8,6 +8,7 @@ import com.personal.TravelPlanner.repository.UserRepository;
 import com.personal.TravelPlanner.service.AuthenticationService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,7 @@ public class AuthenticationController {
     private final UserRepository userRepository;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponseDTO> register(
+    public ResponseEntity<AuthenticationResponseDTO> register(@Valid
             @RequestBody RegisterRequestDTO request) throws Exception {
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
             throw new EmailAlreadyExistsException("Email already in use");
@@ -34,7 +35,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponseDTO> authenticate(@RequestBody AuthenticationRequestDTO request){
+    public ResponseEntity<AuthenticationResponseDTO> authenticate(@Valid @RequestBody AuthenticationRequestDTO request){
 
         return  ResponseEntity.ok(service.authenticate(request));
         //
