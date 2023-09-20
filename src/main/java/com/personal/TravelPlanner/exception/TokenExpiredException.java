@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
-public class TokenExpiredException extends ServletException {
+public class TokenExpiredException extends Exception {
     public TokenExpiredException(String message){
         super(message);
     }

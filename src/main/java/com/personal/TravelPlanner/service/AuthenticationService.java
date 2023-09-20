@@ -87,8 +87,6 @@ public class AuthenticationService  {
                         .token(accessToken)
                         .build();
                 new ObjectMapper().writeValue(response.getOutputStream(), authResponse);
-            }else {
-                throw new TokenExpiredException("Refresh token expired");
             }
         }
     }
