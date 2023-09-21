@@ -1,8 +1,8 @@
-package com.personal.TravelPlanner.service;
+package com.personal.TravelPlanner.service.authentication;
 
-import com.personal.TravelPlanner.dto.AuthenticationRequestDTO;
-import com.personal.TravelPlanner.dto.AuthenticationResponseDTO;
-import com.personal.TravelPlanner.dto.RegisterRequestDTO;
+import com.personal.TravelPlanner.dto.authentication.AuthenticationRequestDTO;
+import com.personal.TravelPlanner.dto.authentication.AuthenticationResponseDTO;
+import com.personal.TravelPlanner.dto.authentication.RegisterRequestDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 

@@ -1,4 +1,4 @@
-package com.personal.TravelPlanner.service;
+package com.personal.TravelPlanner.service.authentication;
 
 import com.personal.TravelPlanner.repository.TokenRepository;
 import jakarta.servlet.http.HttpServletRequest;

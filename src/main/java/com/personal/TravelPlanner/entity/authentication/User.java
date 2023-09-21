@@ -1,4 +1,4 @@
-package com.personal.TravelPlanner.entity;
+package com.personal.TravelPlanner.entity.authentication;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,13 +1,15 @@
-package com.personal.TravelPlanner.service;
+package com.personal.TravelPlanner.service.authentication.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.personal.TravelPlanner.dto.AuthenticationRequestDTO;
-import com.personal.TravelPlanner.dto.AuthenticationResponseDTO;
-import com.personal.TravelPlanner.dto.RegisterRequestDTO;
-import com.personal.TravelPlanner.entity.Token;
-import com.personal.TravelPlanner.entity.User;
+import com.personal.TravelPlanner.dto.authentication.AuthenticationRequestDTO;
+import com.personal.TravelPlanner.dto.authentication.AuthenticationResponseDTO;
+import com.personal.TravelPlanner.dto.authentication.RegisterRequestDTO;
+import com.personal.TravelPlanner.entity.authentication.Token;
+import com.personal.TravelPlanner.entity.authentication.User;
 import com.personal.TravelPlanner.repository.TokenRepository;
 import com.personal.TravelPlanner.repository.UserRepository;
+import com.personal.TravelPlanner.service.authentication.AuthenticationService;
+import com.personal.TravelPlanner.service.authentication.JwtService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +21,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class AuthenticationServiceImpl implements AuthenticationService{
+public class AuthenticationServiceImpl implements AuthenticationService {
 
 
     private final UserRepository userRepository;
@@ -30,8 +32,6 @@ public class AuthenticationServiceImpl implements AuthenticationService{
     @Override
     public AuthenticationResponseDTO register(RegisterRequestDTO request) {
         var user = User.builder()
-                .firstname(request.getFirstname())
-                .lastname(request.getLastname())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(request.getRole())

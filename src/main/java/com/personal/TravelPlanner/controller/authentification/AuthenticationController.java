@@ -1,11 +1,12 @@
-package com.personal.TravelPlanner.controller;
+package com.personal.TravelPlanner.controller.authentification;
 
-import com.personal.TravelPlanner.dto.AuthenticationRequestDTO;
-import com.personal.TravelPlanner.dto.AuthenticationResponseDTO;
-import com.personal.TravelPlanner.dto.RegisterRequestDTO;
+import com.personal.TravelPlanner.dto.authentication.AuthenticationRequestDTO;
+import com.personal.TravelPlanner.dto.authentication.AuthenticationResponseDTO;
+import com.personal.TravelPlanner.dto.authentication.RegisterRequestDTO;
 import com.personal.TravelPlanner.exception.EmailAlreadyExistsException;
 import com.personal.TravelPlanner.repository.UserRepository;
-import com.personal.TravelPlanner.service.AuthenticationServiceImpl;
+import com.personal.TravelPlanner.service.authentication.AuthenticationService;
+import com.personal.TravelPlanner.service.authentication.impl.AuthenticationServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/auth")
 public class AuthenticationController {
 
-    private final AuthenticationServiceImpl service;
+    private final AuthenticationService service;
     private final UserRepository userRepository;
 
     @PostMapping("/register")
