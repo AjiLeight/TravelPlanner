@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(value = "hotel")
@@ -19,6 +20,7 @@ public class Hotel {
     @Id
     private String id;
     @Email
+    @Indexed(unique = true)
     private String email;
     @NotNull
     private String city;

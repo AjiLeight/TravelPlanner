@@ -3,6 +3,7 @@ package com.personal.TravelPlanner.exception;
 import java.time.LocalDateTime;
 
 
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -50,6 +51,13 @@ public class CustomizedResponseEntityHandler extends ResponseEntityExceptionHand
         ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now().toString(),
                 ex.getMessage(), request.getDescription(false));
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(DuplicateKeyException.class)
+    public final ResponseEntity<ErrorDetails> duplicateKeyException(Exception ex, WebRequest request) throws Exception {
+        ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now().toString(),
+                "Email already exists", request.getDescription(false));
+        return new ResponseEntity<>(errorDetails, HttpStatus.CONFLICT);
     }
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
