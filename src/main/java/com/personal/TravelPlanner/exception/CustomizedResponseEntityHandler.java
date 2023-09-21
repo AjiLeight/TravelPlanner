@@ -44,6 +44,13 @@ public class CustomizedResponseEntityHandler extends ResponseEntityExceptionHand
         return new ResponseEntity<>(errorDetails, HttpStatus.UNAUTHORIZED);
 
     }
+
+    @ExceptionHandler(EmailNotFoundException.class)
+    public final ResponseEntity<ErrorDetails> handleEmailNotFoundException(Exception ex, WebRequest request) throws Exception {
+        ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now().toString(),
+                ex.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    }
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
