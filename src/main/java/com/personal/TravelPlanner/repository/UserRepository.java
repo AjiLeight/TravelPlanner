@@ -12,7 +12,7 @@ public interface UserRepository extends MongoRepository<User,String> {
 
     @Query("{email:'?0'}")
     Optional<User> findByEmail(String email);
-
+    User deleteByEmail(String email);
 
 
 }
