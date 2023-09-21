@@ -20,22 +20,41 @@ public class JwtService {
     @Value("${jwt.secret}")
     private String SECRET_KEY;
 
+    @Value("${jwt.jwtTokenExpiry}")
+    private long JWT_TOKEN_EXPIRY;
+
+    @Value("${jwt.jwtRefreshTokenExpiry}")
+    private long JWT_REFRESH_TOKEN_EXPIRY;
+
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
-    public String generateToken(UserDetails userDetails){
-        return generateToken(new HashMap<>(),userDetails);
+    public String generateToken(UserDetails userDetails,Map<String, Object> extraClaims){
+
+
+        return buildToken(new HashMap<>(),userDetails,JWT_TOKEN_EXPIRY);
+
+    }
+    public String generateToken(UserDetails userDetails) {
+        return generateToken(userDetails,new HashMap<>());
     }
 
-    public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
+    public String generateRefreshToken(UserDetails userDetails) {
+
+
+        return buildToken(new HashMap<>(),userDetails,JWT_REFRESH_TOKEN_EXPIRY);
+
+    }
+
+    public String buildToken(Map<String, Object> extraClaims, UserDetails userDetails,long expiration) {
 
         return Jwts
                 .builder()
                 .setClaims (extraClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration (new Date(System.currentTimeMillis() + 1000*60*60*24))
+                .setExpiration (new Date(System.currentTimeMillis() + expiration))
                 .signWith(getSignkey(), SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -70,4 +89,6 @@ public class JwtService {
         byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(keyBytes);
     }
+
+
 }

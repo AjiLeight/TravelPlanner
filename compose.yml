@@ -1,0 +1,16 @@
+version: '3'
+services:
+  travelplanner:
+    image: leight89/travelplanner
+    container_name: travelplannercon
+    ports:
+      - "8080:8080"
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 30 travelplannercon
+    ports:
+      - "8086"
