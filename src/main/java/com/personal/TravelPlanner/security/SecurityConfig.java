@@ -1,4 +1,4 @@
-package com.personal.TravelPlanner.config;
+package com.personal.TravelPlanner.security;
 
 import com.personal.TravelPlanner.security.JwtAuthenticationFilter;
 import com.personal.TravelPlanner.security.JwtAuthorisationEntryPoint;

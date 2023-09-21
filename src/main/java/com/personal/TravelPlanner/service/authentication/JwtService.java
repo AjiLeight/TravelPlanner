@@ -1,4 +1,4 @@
-package com.personal.TravelPlanner.service;
+package com.personal.TravelPlanner.service.authentication;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

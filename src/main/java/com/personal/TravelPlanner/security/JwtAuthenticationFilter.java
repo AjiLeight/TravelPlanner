@@ -1,7 +1,7 @@
 package com.personal.TravelPlanner.security;
 
 import com.personal.TravelPlanner.repository.TokenRepository;
-import com.personal.TravelPlanner.service.JwtService;
+import com.personal.TravelPlanner.service.authentication.JwtService;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import jakarta.servlet.FilterChain;

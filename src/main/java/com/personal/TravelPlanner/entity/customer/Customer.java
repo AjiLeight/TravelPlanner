@@ -1,28 +1,27 @@
-package com.personal.TravelPlanner.entity;
+package com.personal.TravelPlanner.entity.customer;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "token")
-public class Token {
+@Document(value = "customer")
+public class Customer {
 
     @Id
-    public String id;
+    String id;
+    private String firstname;
+    private String lastname;
     @Indexed(unique = true)
-    public String token;
-    public boolean revoked;
-    public boolean expired;
-    @DBRef(db = "user")
-    public User user;
+    private String phone;
+    @Indexed(unique = true)
+    private String email;
 }

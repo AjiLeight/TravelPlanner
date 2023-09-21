@@ -1,4 +1,4 @@
-package com.personal.TravelPlanner.dto;
+package com.personal.TravelPlanner.dto.authentication;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -12,11 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RegisterRequestDTO {
-    @NotBlank(message = "firstname cannot be blank")
-    private String firstname;
-    @NotBlank(message = "lastname cannot be blank")
-    private String lastname;
-    @Email(message = "enter a valid email")
+
     private String email;
     @NotBlank(message = "password cannot be blank")
     private String password;

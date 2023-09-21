@@ -1,4 +1,4 @@
-package com.personal.TravelPlanner.dto;
+package com.personal.TravelPlanner.dto.authentication;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

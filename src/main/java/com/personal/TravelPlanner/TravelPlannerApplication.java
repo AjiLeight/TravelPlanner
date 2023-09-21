@@ -1,9 +1,6 @@
 package com.personal.TravelPlanner;
 
-import com.personal.TravelPlanner.entity.Token;
-import com.personal.TravelPlanner.entity.User;
 import com.personal.TravelPlanner.repository.TokenRepository;
-import com.personal.TravelPlanner.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

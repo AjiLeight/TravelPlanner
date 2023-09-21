@@ -1,4 +1,4 @@
-package com.personal.TravelPlanner.dto;
+package com.personal.TravelPlanner.dto.authentication;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
