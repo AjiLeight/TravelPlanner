@@ -1,10 +1,13 @@
 package com.personal.TravelPlanner.service.hotel.impl;
 
 import com.personal.TravelPlanner.dto.hotel.HotelDTO;
+import com.personal.TravelPlanner.dto.hotel.RoomDTO;
 import com.personal.TravelPlanner.entity.hotel.Hotel;
+import com.personal.TravelPlanner.entity.hotel.Room;
 import com.personal.TravelPlanner.exception.EmailNotFoundException;
 import com.personal.TravelPlanner.repository.UserRepository;
 import com.personal.TravelPlanner.repository.hotel.HotelRepository;
+import com.personal.TravelPlanner.repository.hotel.RoomRepository;
 import com.personal.TravelPlanner.service.hotel.HotelService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -21,6 +24,7 @@ public class HotelServiceImpl implements HotelService {
 
     public final HotelRepository hotelRepository;
     public final UserRepository userRepository;
+    public final RoomRepository roomRepository;
     Logger logger = LoggerFactory.getLogger(HotelService.class);
     ModelMapper modelMapper = new ModelMapper();
 
@@ -47,7 +51,6 @@ public class HotelServiceImpl implements HotelService {
         existingHotel.setName(hotel.getName());
         existingHotel.setEmail(hotel.getEmail());
         existingHotel.setContact(hotel.getContact());
-        existingHotel.setRooms(hotel.getRooms());
         Hotel savedHotel = hotelRepository.save(existingHotel);
         return modelMapper.map(savedHotel,HotelDTO.class);
     }
