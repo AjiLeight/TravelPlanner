@@ -31,6 +31,7 @@ public class HotelControllerImpl implements HotelController {
 
     @Override
     public ResponseEntity<HotelDTO> updateHotel(HotelDTO hotelDTO) {
+        System.out.println(hotelDTO);
         return ResponseEntity.ok(hotelService.updateHotel(hotelDTO));
     }
 
