@@ -10,6 +10,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Document(value = "hotel")
 @Data
 @AllArgsConstructor
@@ -30,7 +32,7 @@ public class Hotel {
     private String name;
     @NotNull
     private String contact;
-    private Integer rooms;
+    private List<Room> rooms;
 
     public Hotel( String email, String city, String address, String name, String contact) {
         this.email = email;
