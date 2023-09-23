@@ -8,12 +8,14 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class HotelDTO {
     private String email;
     private String city;
     private String address;
     private String name;
     private String contact;
+    private Integer capacity;
 
     public HotelDTO(String email, String city, String address, String name, String contact) {
         this.email = email;

@@ -12,7 +12,9 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Document(value = "hotel")
 @Data
@@ -34,13 +36,7 @@ public class Hotel {
     private String name;
     @NotNull
     private String contact;
+    private Integer capacity;
+    private Map<Date, Integer> rooms;
 
-
-    public Hotel( String email, String city, String address, String name, String contact) {
-        this.email = email;
-        this.city = city;
-        this.address = address;
-        this.name = name;
-        this.contact = contact;
-    }
 }
