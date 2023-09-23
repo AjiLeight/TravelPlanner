@@ -2,8 +2,7 @@ package com.personal.TravelPlanner.controller.hotel.impl;
 
 import com.personal.TravelPlanner.controller.hotel.HotelController;
 import com.personal.TravelPlanner.dto.hotel.HotelDTO;
-import com.personal.TravelPlanner.entity.hotel.Hotel;
-import com.personal.TravelPlanner.exception.EmailNotFoundException;
+import com.personal.TravelPlanner.exception.auth.EmailNotFoundException;
 import com.personal.TravelPlanner.service.hotel.HotelService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;

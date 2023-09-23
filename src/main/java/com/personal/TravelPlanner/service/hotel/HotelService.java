@@ -1,8 +1,7 @@
 package com.personal.TravelPlanner.service.hotel;
 
 import com.personal.TravelPlanner.dto.hotel.HotelDTO;
-import com.personal.TravelPlanner.entity.hotel.Hotel;
-import com.personal.TravelPlanner.exception.EmailNotFoundException;
+import com.personal.TravelPlanner.exception.auth.EmailNotFoundException;
 
 import java.util.List;
 

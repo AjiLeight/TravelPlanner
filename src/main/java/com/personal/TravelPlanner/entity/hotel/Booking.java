@@ -1,5 +1,7 @@
 package com.personal.TravelPlanner.entity.hotel;
 
+import com.personal.TravelPlanner.entity.authentication.User;
+import com.personal.TravelPlanner.entity.customer.Customer;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,19 +12,19 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
-import java.util.List;
 
-@Document(value = "room")
+@Document(value = "booking")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Room {
+public class Booking {
     @Id
     private String id;
-    @NotNull
-    private int roomNo;
     @DBRef
-    private List<Booking> bookings;
-
+    private Customer customer;
+    @NotNull
+    private Date from;
+    @NotNull
+    private Date to;
 }

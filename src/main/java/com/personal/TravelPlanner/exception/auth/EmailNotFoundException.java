@@ -1,4 +1,4 @@
-package com.personal.TravelPlanner.exception;
+package com.personal.TravelPlanner.exception.auth;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
