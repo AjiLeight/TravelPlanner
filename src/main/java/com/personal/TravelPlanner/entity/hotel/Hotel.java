@@ -34,8 +34,7 @@ public class Hotel {
     private String name;
     @NotNull
     private String contact;
-    @DBRef
-    private List<Room> rooms;
+
 
     public Hotel( String email, String city, String address, String name, String contact) {
         this.email = email;
@@ -43,6 +42,5 @@ public class Hotel {
         this.address = address;
         this.name = name;
         this.contact = contact;
-        this.rooms = new ArrayList<>();
     }
 }

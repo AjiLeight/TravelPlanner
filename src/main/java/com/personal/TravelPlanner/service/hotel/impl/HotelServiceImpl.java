@@ -5,7 +5,6 @@ import com.personal.TravelPlanner.entity.hotel.Hotel;
 import com.personal.TravelPlanner.exception.auth.EmailNotFoundException;
 import com.personal.TravelPlanner.repository.UserRepository;
 import com.personal.TravelPlanner.repository.hotel.HotelRepository;
-import com.personal.TravelPlanner.repository.hotel.RoomRepository;
 import com.personal.TravelPlanner.service.hotel.HotelService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -22,7 +21,6 @@ public class HotelServiceImpl implements HotelService {
 
     public final HotelRepository hotelRepository;
     public final UserRepository userRepository;
-    public final RoomRepository roomRepository;
     Logger logger = LoggerFactory.getLogger(HotelService.class);
     ModelMapper modelMapper = new ModelMapper();
 
