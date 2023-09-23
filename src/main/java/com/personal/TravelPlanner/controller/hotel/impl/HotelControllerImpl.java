@@ -48,4 +48,5 @@ public class HotelControllerImpl implements HotelController {
     public ResponseEntity<HotelDTO> getHotelByEmail(String email) throws EmailNotFoundException {
         return ResponseEntity.ok(hotelService.getHotelByEmail(email));
     }
+
 }

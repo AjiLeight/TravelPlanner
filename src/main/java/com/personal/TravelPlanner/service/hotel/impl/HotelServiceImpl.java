@@ -1,11 +1,13 @@
 package com.personal.TravelPlanner.service.hotel.impl;
 
+import com.personal.TravelPlanner.constants.UpdateRoomsAction;
+import com.personal.TravelPlanner.dto.hotel.CapacityResponseDTO;
 import com.personal.TravelPlanner.dto.hotel.HotelDTO;
+import com.personal.TravelPlanner.dto.hotel.UpdateCapacityRequestDTO;
 import com.personal.TravelPlanner.entity.hotel.Hotel;
 import com.personal.TravelPlanner.exception.auth.EmailNotFoundException;
 import com.personal.TravelPlanner.repository.UserRepository;
 import com.personal.TravelPlanner.repository.hotel.HotelRepository;
-import com.personal.TravelPlanner.repository.hotel.RoomRepository;
 import com.personal.TravelPlanner.service.hotel.HotelService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -22,7 +24,6 @@ public class HotelServiceImpl implements HotelService {
 
     public final HotelRepository hotelRepository;
     public final UserRepository userRepository;
-    public final RoomRepository roomRepository;
     Logger logger = LoggerFactory.getLogger(HotelService.class);
     ModelMapper modelMapper = new ModelMapper();
 
@@ -72,5 +73,44 @@ public class HotelServiceImpl implements HotelService {
         catch (Exception exception){
             throw new EmailNotFoundException("email not found");
         }
+    }
+
+    @Override
+    public String addCapacity(String hotelEmail, Integer capacity) {
+        Hotel hotel = hotelRepository.findByEmail(hotelEmail);
+        hotel.setCapacity(capacity);
+        hotelRepository.save(hotel);
+        return "successfully updated number of rooms to "+capacity;
+    }
+
+    @Override
+    public CapacityResponseDTO getCapacity(String hotel) {
+        return CapacityResponseDTO.builder()
+                .numberOfRooms(hotelRepository
+                        .findByEmail(hotel)
+                        .getCapacity()
+                )
+                .build();
+    }
+
+    @Override
+    public CapacityResponseDTO updateCapacity(UpdateCapacityRequestDTO request) throws Exception {
+        Hotel hotel = hotelRepository.findByEmail(request.getHotelId());
+        if(request.getAction().equals(UpdateRoomsAction.ADD.getAction())){
+            hotel.setCapacity(hotel.getCapacity() + request.getCapacity());
+        }
+        else if(request.getAction().equals(UpdateRoomsAction.DELETE.getAction())){
+            hotel.setCapacity(hotel.getCapacity() - request.getCapacity());
+        }
+        else {
+            throw new IllegalArgumentException("invalid action type");
+        }
+        if(hotel.getCapacity()<0){
+            throw new Exception("capacity can not be less than zero");
+        }
+        hotelRepository.save(hotel);
+        return CapacityResponseDTO.builder()
+                .numberOfRooms(hotel.getCapacity())
+                .build();
     }
 }

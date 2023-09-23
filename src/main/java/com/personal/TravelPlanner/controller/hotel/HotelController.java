@@ -22,4 +22,5 @@ public interface HotelController {
     public ResponseEntity<List<HotelDTO>> getAllHotels();
     @GetMapping("/{email}")
     public ResponseEntity<HotelDTO> getHotelByEmail(@PathVariable(required = true) @Email String email) throws EmailNotFoundException;
+
 }
