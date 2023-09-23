@@ -1,6 +1,5 @@
 package com.personal.TravelPlanner.entity.customer;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
