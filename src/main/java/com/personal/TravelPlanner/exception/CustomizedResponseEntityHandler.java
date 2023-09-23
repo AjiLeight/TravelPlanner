@@ -3,8 +3,10 @@ package com.personal.TravelPlanner.exception;
 import java.time.LocalDateTime;
 
 
+import com.personal.TravelPlanner.exception.auth.EmailAlreadyExistsException;
+import com.personal.TravelPlanner.exception.auth.EmailNotFoundException;
+import com.personal.TravelPlanner.exception.auth.TokenExpiredException;
 import org.springframework.dao.DuplicateKeyException;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;

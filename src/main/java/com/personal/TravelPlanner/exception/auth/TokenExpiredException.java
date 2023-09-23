@@ -1,4 +1,4 @@
-package com.personal.TravelPlanner.exception;
+package com.personal.TravelPlanner.exception.auth;
 
 import jakarta.servlet.ServletException;
 import org.springframework.http.HttpStatus;

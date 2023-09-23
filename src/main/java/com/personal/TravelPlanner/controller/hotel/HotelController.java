@@ -1,8 +1,7 @@
 package com.personal.TravelPlanner.controller.hotel;
 
 import com.personal.TravelPlanner.dto.hotel.HotelDTO;
-import com.personal.TravelPlanner.entity.hotel.Hotel;
-import com.personal.TravelPlanner.exception.EmailNotFoundException;
+import com.personal.TravelPlanner.exception.auth.EmailNotFoundException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import org.springframework.http.ResponseEntity;

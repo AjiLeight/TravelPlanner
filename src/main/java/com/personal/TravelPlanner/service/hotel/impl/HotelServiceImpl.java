@@ -1,10 +1,8 @@
 package com.personal.TravelPlanner.service.hotel.impl;
 
 import com.personal.TravelPlanner.dto.hotel.HotelDTO;
-import com.personal.TravelPlanner.dto.hotel.RoomDTO;
 import com.personal.TravelPlanner.entity.hotel.Hotel;
-import com.personal.TravelPlanner.entity.hotel.Room;
-import com.personal.TravelPlanner.exception.EmailNotFoundException;
+import com.personal.TravelPlanner.exception.auth.EmailNotFoundException;
 import com.personal.TravelPlanner.repository.UserRepository;
 import com.personal.TravelPlanner.repository.hotel.HotelRepository;
 import com.personal.TravelPlanner.repository.hotel.RoomRepository;

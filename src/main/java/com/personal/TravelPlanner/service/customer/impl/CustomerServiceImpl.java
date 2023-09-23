@@ -2,7 +2,6 @@ package com.personal.TravelPlanner.service.customer.impl;
 
 import com.personal.TravelPlanner.dto.cutomer.CustomerDTO;
 import com.personal.TravelPlanner.entity.customer.Customer;
-import com.personal.TravelPlanner.exception.EmailNotFoundException;
 import com.personal.TravelPlanner.repository.Customer.CustomerRepository;
 import com.personal.TravelPlanner.repository.UserRepository;
 import com.personal.TravelPlanner.service.customer.CustomerService;

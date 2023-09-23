@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface RoomRepository extends MongoRepository<Room, String> {
     Optional<Room> findByRoomNo(int roomNo);
+    Room deleteByRoomNo(int roomNo);
 }
