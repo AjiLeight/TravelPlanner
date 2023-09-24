@@ -11,13 +11,9 @@ public interface HotelService {
     HotelDTO saveHotel(HotelDTO hotel);
     String deleteHotel(String email);
     HotelDTO updateHotel(HotelDTO hotel);
-
     List<HotelDTO> getAllHotels();
     HotelDTO getHotelByEmail(String email) throws EmailNotFoundException;
-
     String addCapacity(String hotelEmail, Integer capacity);
-
     CapacityResponseDTO getCapacity(String hotel);
-
     CapacityResponseDTO updateCapacity(UpdateCapacityRequestDTO request) throws Exception;
 }

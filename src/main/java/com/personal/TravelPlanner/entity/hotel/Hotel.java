@@ -37,6 +37,7 @@ public class Hotel {
     @NotNull
     private String contact;
     private Integer capacity;
-    private Map<Date, Integer> rooms;
+    @DBRef
+    private List<Booking> booking;
 
 }
