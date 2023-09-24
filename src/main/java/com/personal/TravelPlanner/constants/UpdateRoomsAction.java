@@ -1,5 +1,8 @@
 package com.personal.TravelPlanner.constants;
 
+import lombok.Getter;
+
+@Getter
 public enum UpdateRoomsAction {
     ADD("add"),
     DELETE("delete");
@@ -10,7 +13,4 @@ public enum UpdateRoomsAction {
         this.action = action;
     }
 
-    public String getAction(){
-        return action;
-    }
 }
