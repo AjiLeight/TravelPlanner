@@ -5,6 +5,7 @@ import com.personal.TravelPlanner.entity.hotel.Booking;
 import com.personal.TravelPlanner.repository.hotel.BookingRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -49,5 +50,18 @@ public class DemoController {
         return dates;
     }
 
+    @GetMapping("/booking")
+    public Booking getBooking(@RequestBody BookingDto bookingDto ){
+        Query query= new Query(Criteria.where("hotelId").is(bookingDto.getHotelId()).and("date").is(bookingDto.getDate()));
+        return mongoTemplate.findOne(query,Booking.class);
+    }
+
+}
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+class BookingDto{
+    private LocalDate date;
+    private String hotelId;
 }
 
