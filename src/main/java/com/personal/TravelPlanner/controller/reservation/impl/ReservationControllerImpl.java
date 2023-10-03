@@ -19,8 +19,8 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class ReservationControllerImpl implements ReservationController {
-    @Autowired
-    ReservationService reservationService;
+
+    private final ReservationService reservationService;
 
     @Override
     public ResponseEntity<List<HotelDTO>> searchAvailableHotelByCIty(AvailabilityByCityDTO dto) {
@@ -29,6 +29,6 @@ public class ReservationControllerImpl implements ReservationController {
 
     @Override
     public ResponseEntity<Reservation> reserveHotel(@Valid @RequestBody ReservationDTO reservationDTO) throws ReservationException {
-        return ResponseEntity.ok(reservationService.reserveHotel(reservationDTO));
+        return ResponseEntity.ok(reservationService.reserveHotel (reservationDTO));
     }
 }

@@ -22,7 +22,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -73,30 +72,18 @@ public class ReservationServiceImpl implements ReservationService {
 
             Query findBookings = new Query(Criteria.where("hotelId").is(reservationDTO.getHotelId()).and("date").in(dates));
             List<Booking> bookings = mongoTemplate.find(findBookings, Booking.class);
+            Hotel hotel=hotelRepository.findByEmail(reservationDTO.getHotelId());
+            List<LocalDate> unbookedDates= nonBookedDates(dates,bookings);
             if (!bookings.isEmpty()) {
-
                 bookings.forEach(booking -> {
-                    if(isDateExist(booking.getDate(),dates)){
                         booking.setRooms(booking.getRooms()-1);
-                        bookingRepository.save(booking);
-                    }
-
-
-                });
+                        bookingRepository.save(booking);});
+                if(!unbookedDates.isEmpty()){
+                    saveUnbookedDates(unbookedDates,reservation,hotel);
+                }
 
             }else{
-                Hotel hotel=hotelRepository.findByEmail(reservationDTO.getHotelId());
-                dates.forEach(date->{
-                    Booking newBooking= Booking.builder()
-                            .hotelId(reservation.getHotelId())
-                            .rooms(hotel.getCapacity()-1)
-                            .date(date)
-                            .city(hotel.getCity())
-                            .build();
-                    bookingRepository.save(newBooking);
-
-                });
-
+                saveUnbookedDates(dates,reservation,hotel);
             }
             reservationRepository.save(reservation);
 
@@ -108,6 +95,28 @@ public class ReservationServiceImpl implements ReservationService {
         }
 
 
+    }
+
+    public void saveUnbookedDates(List<LocalDate> dates, Reservation reservation, Hotel hotel){
+        dates.forEach(date->{
+            Booking newBooking= Booking.builder()
+                    .hotelId(reservation.getHotelId())
+                    .rooms(hotel.getCapacity()-1)
+                    .date(date)
+                    .city(hotel.getCity())
+                    .build();
+            bookingRepository.save(newBooking);
+        });
+
+    }
+
+
+    public List<LocalDate> nonBookedDates(List<LocalDate> dates, List<Booking> bookings){
+
+        bookings.forEach(booking -> {
+            dates.remove(booking.getDate());
+        });
+        return dates;
     }
 
     private boolean isDateExist(LocalDate date,List<LocalDate> dates){
