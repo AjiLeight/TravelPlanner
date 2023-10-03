@@ -42,7 +42,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         var refreshToken = jwtService.generateRefreshToken(user);
         saveUserToken(savedUser, jwtToken);
         return AuthenticationResponseDTO.builder()
-                .accessToken(jwtToken).refreshToken(refreshToken)
+                .accessToken(jwtToken)
+                .refreshToken(refreshToken)
+                .email(savedUser.getEmail())
+                .role(savedUser.getRole())
                 .build();
     }
     @Override
@@ -58,7 +61,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         var refreshToken = jwtService.generateRefreshToken(user);
         saveUserToken(user, jwtToken);
         return AuthenticationResponseDTO.builder()
-                .accessToken(jwtToken).refreshToken(refreshToken)
+                .accessToken(jwtToken)
+                .refreshToken(refreshToken)
+                .email(user.getEmail())
+                .role(user.getRole())
                 .build();
     }
     @Override
