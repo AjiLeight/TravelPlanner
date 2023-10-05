@@ -9,7 +9,6 @@ import com.personal.TravelPlanner.exception.Reservation.ReservationException;
 import com.personal.TravelPlanner.service.reservation.ReservationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,5 +29,21 @@ public class ReservationControllerImpl implements ReservationController {
     @Override
     public ResponseEntity<Reservation> reserveHotel(@Valid @RequestBody ReservationDTO reservationDTO) throws ReservationException {
         return ResponseEntity.ok(reservationService.reserveHotel (reservationDTO));
+    }
+
+    @Override
+    public ResponseEntity<List<Reservation>> allReservation(String email) {
+        List<Reservation> reservationList= reservationService.getAllReservation(email);
+        return ResponseEntity.ok(reservationList);
+    }
+
+    @Override
+    public ResponseEntity<Boolean> cancelReservation(String id) throws ReservationException {
+        return ResponseEntity.ok(reservationService.cancelReservation(id));
+    }
+
+    @Override
+    public ResponseEntity<Reservation> GetReservationById(String id) throws ReservationException {
+        return ResponseEntity.ok(reservationService.getReservationById(id));
     }
 }

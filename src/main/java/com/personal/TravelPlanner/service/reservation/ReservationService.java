@@ -14,4 +14,10 @@ public interface ReservationService {
     List<HotelDTO> searchHotelForAvailabilityByCity(AvailabilityByCityDTO dto);
 
     Reservation reserveHotel(ReservationDTO reservationDTO) throws ReservationException;
+
+    List<Reservation> getAllReservation(String email);
+
+    boolean cancelReservation(String id) throws ReservationException;
+
+    Reservation getReservationById(String id) throws ReservationException;
 }

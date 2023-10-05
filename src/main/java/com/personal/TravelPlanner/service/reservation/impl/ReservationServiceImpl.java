@@ -97,6 +97,38 @@ public class ReservationServiceImpl implements ReservationService {
 
     }
 
+    @Override
+    public List<Reservation> getAllReservation(String email) {
+        return reservationRepository.findAllByUserId(email);
+    }
+
+    @Override
+    public boolean cancelReservation(String id) throws ReservationException {
+        Reservation reservation = reservationRepository.findById(id)
+                .orElseThrow(()->new ReservationException("could not find reservation"));
+        //extract dates
+        List<LocalDate> dates=extractDates(reservation.getFromDate(),reservation.getToDate());
+        //find booking from the reservation
+        Query findBookings = new Query(Criteria.where("hotelId").is(reservation.getHotelId()).and("date").in(dates));
+        List<Booking> bookings= mongoTemplate.find(findBookings,Booking.class);
+
+        //increase no of rooms in booking records b 1
+        bookings.forEach(booking -> {
+            booking.setRooms(booking.getRooms()+1);
+            bookingRepository.save(booking);
+        });
+        reservationRepository.deleteById(id);
+        boolean result=reservationRepository.existsById(id);
+        return !result;
+    }
+
+    @Override
+    public Reservation getReservationById(String id) throws ReservationException {
+        return reservationRepository.findById(id)
+                .orElseThrow(
+                        ()-> new ReservationException("could not find reservation"));
+    }
+
     public void saveUnbookedDates(List<LocalDate> dates, Reservation reservation, Hotel hotel){
         dates.forEach(date->{
             Booking newBooking= Booking.builder()
