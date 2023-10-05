@@ -15,4 +15,5 @@ public class AuthenticationResponseDTO {
     private String refreshToken;
     private String email;
     private String role;
+
 }
