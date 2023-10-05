@@ -1,5 +1,6 @@
 # TravelPlanner
-TravelPlanner [Spring Boot](https://spring.io/projects/spring-boot)
+TravelPlanner [Spring Boot](https://spring.io/projects/spring-boot) 
+ - [Frontend](https://github.com/AjiLeight/TravelPlanner-FrontEnd.git)
 
 ## Requirements
 
