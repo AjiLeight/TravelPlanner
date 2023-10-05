@@ -13,5 +13,7 @@ public class AuthenticationResponseDTO {
 
     private String accessToken;
     private String refreshToken;
+    private String email;
+    private String role;
 
 }
