@@ -11,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -24,9 +25,7 @@ public class CustomizedResponseEntityHandler extends ResponseEntityExceptionHand
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<ErrorDetails> handleAllExceptions(Exception ex, WebRequest request) throws Exception {
         ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now().toString(),ex.getMessage(), request.getDescription(false));
-
         return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
-
     }
 
     @ExceptionHandler(EmailAlreadyExistsException.class)
@@ -60,6 +59,12 @@ public class CustomizedResponseEntityHandler extends ResponseEntityExceptionHand
         ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now().toString(),
                 "Email already exists", request.getDescription(false));
         return new ResponseEntity<>(errorDetails, HttpStatus.CONFLICT);
+    }
+    @ExceptionHandler(BadCredentialsException.class)
+    public final ResponseEntity<ErrorDetails> badCredentialsException(Exception ex, WebRequest request) throws Exception {
+        ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now().toString(),
+                "BAD_CREDENTIALS", request.getDescription(false));
+        return new ResponseEntity<>(errorDetails, HttpStatus.UNAUTHORIZED);
     }
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
