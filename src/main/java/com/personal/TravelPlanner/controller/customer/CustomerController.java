@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/customer")
+@CrossOrigin
 public interface CustomerController {
     @PostMapping()
     ResponseEntity<CustomerDTO> saveCustomer(@RequestBody @Valid  CustomerDTO customer) throws Exception;
