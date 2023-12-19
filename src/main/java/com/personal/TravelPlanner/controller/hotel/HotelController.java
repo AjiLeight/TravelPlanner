@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/hotel")
+@CrossOrigin
 public interface HotelController {
     @PostMapping
     public ResponseEntity<HotelDTO> saveHotel(@RequestBody(required = true) @Valid HotelDTO hotelDTO);

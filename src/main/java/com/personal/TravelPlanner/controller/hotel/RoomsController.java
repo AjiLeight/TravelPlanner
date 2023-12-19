@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/api/v1/hotel/rooms")
 @RestController
+@CrossOrigin
 public interface RoomsController {
     @PostMapping("")
     public ResponseEntity<String> addRooms(

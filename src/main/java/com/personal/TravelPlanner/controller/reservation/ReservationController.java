@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/reserve")
+@CrossOrigin
 public interface ReservationController {
     @GetMapping()
     ResponseEntity<List<HotelDTO>> searchAvailableHotelByCIty(@RequestBody AvailabilityByCityDTO dto);
