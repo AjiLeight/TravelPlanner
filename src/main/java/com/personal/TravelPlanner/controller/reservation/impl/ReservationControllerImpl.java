@@ -11,8 +11,11 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -22,7 +25,12 @@ public class ReservationControllerImpl implements ReservationController {
     private final ReservationService reservationService;
 
     @Override
-    public ResponseEntity<List<HotelDTO>> searchAvailableHotelByCIty(AvailabilityByCityDTO dto) {
+    public ResponseEntity<List<HotelDTO>> searchAvailableHotelByCIty(String city, LocalDate from, LocalDate to) {
+        AvailabilityByCityDTO dto = AvailabilityByCityDTO.builder()
+                .city(city)
+                .from(from)
+                .to(to)
+                .build();
         return ResponseEntity.ok(reservationService.searchHotelForAvailabilityByCity(dto));
     }
 

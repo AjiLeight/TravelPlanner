@@ -10,6 +10,8 @@ import jakarta.validation.constraints.Email;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -17,7 +19,7 @@ import java.util.List;
 @CrossOrigin
 public interface ReservationController {
     @GetMapping()
-    ResponseEntity<List<HotelDTO>> searchAvailableHotelByCIty(@RequestBody AvailabilityByCityDTO dto);
+    ResponseEntity<List<HotelDTO>> searchAvailableHotelByCIty(@RequestParam String city, @RequestParam LocalDate from, @RequestParam LocalDate to);
 
 
     @PostMapping
