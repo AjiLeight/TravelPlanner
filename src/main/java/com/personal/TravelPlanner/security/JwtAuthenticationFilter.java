@@ -1,7 +1,7 @@
 package com.personal.TravelPlanner.security;
 
 import com.personal.TravelPlanner.repository.TokenRepository;
-import com.personal.TravelPlanner.service.JwtService;
+import com.personal.TravelPlanner.service.authentication.JwtService;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import jakarta.servlet.FilterChain;
@@ -18,7 +18,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import com.personal.TravelPlanner.exception.TokenExpiredException;
+import com.personal.TravelPlanner.exception.auth.TokenExpiredException;
 
 import java.io.IOException;
 

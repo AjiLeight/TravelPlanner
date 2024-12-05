@@ -1,0 +1,57 @@
+package com.personal.TravelPlanner.controller.reservation.impl;
+
+import com.personal.TravelPlanner.controller.reservation.ReservationController;
+import com.personal.TravelPlanner.dto.hotel.HotelDTO;
+import com.personal.TravelPlanner.dto.reservation.AvailabilityByCityDTO;
+import com.personal.TravelPlanner.dto.reservation.ReservationDTO;
+import com.personal.TravelPlanner.entity.reservation.Reservation;
+import com.personal.TravelPlanner.exception.Reservation.ReservationException;
+import com.personal.TravelPlanner.service.reservation.ReservationService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
+
+@RestController
+@RequiredArgsConstructor
+public class ReservationControllerImpl implements ReservationController {
+
+    private final ReservationService reservationService;
+
+    @Override
+    public ResponseEntity<List<HotelDTO>> searchAvailableHotelByCIty(String city, LocalDate from, LocalDate to) {
+        AvailabilityByCityDTO dto = AvailabilityByCityDTO.builder()
+                .city(city)
+                .from(from)
+                .to(to)
+                .build();
+        return ResponseEntity.ok(reservationService.searchHotelForAvailabilityByCity(dto));
+    }
+
+    @Override
+    public ResponseEntity<Reservation> reserveHotel(@Valid @RequestBody ReservationDTO reservationDTO) throws ReservationException {
+        return ResponseEntity.ok(reservationService.reserveHotel (reservationDTO));
+    }
+
+    @Override
+    public ResponseEntity<List<Reservation>> allReservation(String email) {
+        List<Reservation> reservationList= reservationService.getAllReservation(email);
+        return ResponseEntity.ok(reservationList);
+    }
+
+    @Override
+    public ResponseEntity<Boolean> cancelReservation(String id) throws ReservationException {
+        return ResponseEntity.ok(reservationService.cancelReservation(id));
+    }
+
+    @Override
+    public ResponseEntity<Reservation> GetReservationById(String id) throws ReservationException {
+        return ResponseEntity.ok(reservationService.getReservationById(id));
+    }
+}
